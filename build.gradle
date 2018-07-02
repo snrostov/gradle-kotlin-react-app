@@ -1,0 +1,59 @@
+buildscript {
+    ext.kotlin_version = '1.2.50'
+    ext.kotlinx_html_version = "0.6.4"
+    ext.kotlin_frontend_version = "0.0.31"
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin' }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:$kotlin_frontend_version"
+    }
+}
+
+plugins {
+    id 'kotlin2js' version '1.2.50'
+}
+
+group 'org.jetbrains.kotlin'
+version '1.0-SNAPSHOT'
+
+apply plugin: "org.jetbrains.kotlin.frontend"
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url "http://dl.bintray.com/kotlinx/kotlinx" }
+    maven { url "http://dl.bintray.com/kotlin/kotlin-js-wrappers" }
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    compile "org.jetbrains:kotlin-react-dom:16.4.1-pre.33-kotlin-$kotlin_version"
+
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+}
+
+kotlinFrontend {
+    npm {
+        dependency("react")
+        dependency("react-dom")
+    }
+
+    webpackBundle {
+        bundleName = "main"
+        contentPath = file('src/main/web')
+    }
+}
+
+compileKotlin2Js {
+    kotlinOptions {
+        outputFile = "$projectDir/build/classes/main/${name}.js"
+        moduleKind = "commonjs"
+        sourceMap = true
+        sourceMapEmbedSources = "always"
+    }
+}
