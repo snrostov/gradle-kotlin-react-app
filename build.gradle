@@ -31,6 +31,7 @@ repositories {
 }
 
 dependencies {
+    // Kotlin/JS libraries should be listed here
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     compile "org.jetbrains:kotlin-react-dom:16.4.1-pre.33-kotlin-$kotlin_version"
 
@@ -39,6 +40,7 @@ dependencies {
 
 kotlinFrontend {
     npm {
+        // NPM libraries should be listed here
         dependency("react")
         dependency("react-dom")
     }
