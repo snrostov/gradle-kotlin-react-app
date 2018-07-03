@@ -51,3 +51,12 @@ compileKotlin2Js {
         sourceMapEmbedSources = "always"
     }
 }
+
+compileTestKotlin2Js {
+    kotlinOptions {
+        outputFile = "$projectDir/build/classes/test/${name}-tests.js"
+        moduleKind = "commonjs"
+        sourceMap = true
+        sourceMapEmbedSources = "always"
+    }
+}
