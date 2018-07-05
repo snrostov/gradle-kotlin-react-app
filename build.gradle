@@ -31,6 +31,8 @@ dependencies {
 }
 
 kotlinFrontend {
+    sourceMaps = true
+
     npm {
         // NPM libraries should be listed here
         dependency("react")
@@ -40,12 +42,13 @@ kotlinFrontend {
     webpackBundle {
         bundleName = "main"
         contentPath = file('src/main/web')
+        sourceMapEnabled = true
     }
 }
 
 compileKotlin2Js {
     kotlinOptions {
-        outputFile = "$projectDir/build/classes/main/${name}.js"
+        outputFile = "$projectDir/build/classes/main/${project.name}.js"
         moduleKind = "commonjs"
         sourceMap = true
         sourceMapEmbedSources = "always"
@@ -54,7 +57,7 @@ compileKotlin2Js {
 
 compileTestKotlin2Js {
     kotlinOptions {
-        outputFile = "$projectDir/build/classes/test/${name}-tests.js"
+        outputFile = "$projectDir/build/classes/test/${project.name}-tests.js"
         moduleKind = "commonjs"
         sourceMap = true
         sourceMapEmbedSources = "always"
